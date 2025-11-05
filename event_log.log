@@ -1,0 +1,17 @@
+[2025-11-05 13:09:31.312488] EVENTO: medicamento_agregado - DATOS: <Medicamento ampisilina>
+[2025-11-05 13:09:39.724576] EVENTO: medicamento_actualizado - DATOS: <Medicamento ampisilina>
+[2025-11-05 13:11:13.290036] EVENTO: medicamento_agregado - DATOS: <Medicamento parazetamol>
+[2025-11-05 13:11:33.242158] EVENTO: medicamento_agregado - DATOS: <Medicamento prueva1>
+[2025-11-05 13:11:40.982411] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva1>
+[2025-11-05 13:11:45.885953] EVENTO: medicamento_actualizado - DATOS: <Medicamento parazetamol>
+[2025-11-05 13:11:49.796318] EVENTO: medicamento_actualizado - DATOS: <Medicamento ampisilina>
+[2025-11-05 14:26:09.056502] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva>
+[2025-11-05 14:26:14.174004] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva>
+[2025-11-05 14:26:19.221586] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva>
+[2025-11-05 15:09:17.047153] EVENTO: medicamento_agregado - DATOS: <Medicamento parazetamol>
+[2025-11-05 15:09:51.322256] EVENTO: medicamento_agregado - DATOS: <Medicamento keterolako>
+[2025-11-05 15:14:47.247327] EVENTO: medicamento_agregado - DATOS: <Medicamento prueva 2>
+[2025-11-05 15:15:10.334995] EVENTO: medicamento_agregado - DATOS: <Medicamento prueva 3>
+[2025-11-05 15:15:20.276938] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva 3>
+[2025-11-05 15:15:27.457390] EVENTO: medicamento_actualizado - DATOS: <Medicamento prueva 2>
+[2025-11-05 15:16:15.820811] EVENTO: medicamento_actualizado - DATOS: <Medicamento parazetamol>

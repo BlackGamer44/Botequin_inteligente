@@ -1,27 +1,35 @@
-class BotiquinDB:
-    __instance = None
+from database import Database
+from werkzeug.security import generate_password_hash, check_password_hash
 
-    def __init__(self):
-        if BotiquinDB.__instance is not None:
-            raise Exception("Esta clase es un Singleton. Usa get_instance().")
-        else:
-            self.medicamentos = []
-            BotiquinDB.__instance = self
+db_instance = Database.get_instance()
+db = db_instance.db
 
-    @staticmethod
-    def get_instance():
-        if BotiquinDB.__instance is None:
-            BotiquinDB()
-        return BotiquinDB.__instance
+class Usuario(db.Model):
+    __tablename__ = "usuarios"
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False, unique=True)
+    contraseña_hash = db.Column(db.String(255), nullable=False)
 
-    def agregar_medicamento(self, medicamento):
-        self.medicamentos.append(medicamento)
+    def set_password(self, contraseña):
+        self.contraseña_hash = generate_password_hash(contraseña)
 
-    def obtener_todos(self):
-        return self.medicamentos
+    def check_password(self, contraseña):
+        return check_password_hash(self.contraseña_hash, contraseña)
 
-    def obtener_por_nombre(self, nombre):
-        for m in self.medicamentos:
-            if m["nombre"] == nombre:
-                return m
-        return None
+
+class Medicamento(db.Model):
+    __tablename__ = "medicamentos"
+
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    cantidad_total = db.Column(db.Integer, nullable=False)
+    consumo_diario = db.Column(db.Integer, nullable=False)
+    cantidad_restante = db.Column(db.Integer, nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)  # ← relación con usuario
+
+    usuario = db.relationship("Usuario", backref=db.backref("medicamentos", lazy=True))
+
+    def __repr__(self):
+        return f"<Medicamento {self.nombre}>"
+
+
