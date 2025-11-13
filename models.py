@@ -25,11 +25,12 @@ class Medicamento(db.Model):
     cantidad_total = db.Column(db.Integer, nullable=False)
     consumo_diario = db.Column(db.Integer, nullable=False)
     cantidad_restante = db.Column(db.Integer, nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)  # ← relación con usuario
+    tipo = db.Column(db.String(50), nullable=False)  # ← nuevo campo
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)
 
     usuario = db.relationship("Usuario", backref=db.backref("medicamentos", lazy=True))
 
     def __repr__(self):
-        return f"<Medicamento {self.nombre}>"
+        return f"<Medicamento {self.nombre} ({self.tipo})>"
 
 
