@@ -78,8 +78,8 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop("usuario", None)
     event_manager.emit("cierre_sesion", {"usuario": session.get("usuario", "Invitado")})
+    session.pop("usuario", None)
     flash("Sesión cerrada correctamente", "info")
     return redirect(url_for("login"))
 
