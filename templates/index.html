@@ -17,7 +17,7 @@
             margin: 0;
         }
 
-        /* 🔴🟡 COLORES DE FILAS SEGÚN STOCK */
+        /*  COLORES DE FILAS SEGÚN STOCK */
         .stock-rojo {
             background-color: rgba(255, 0, 0, 0.4) !important;
         }
@@ -31,7 +31,7 @@
             cursor: pointer;
         }
 
-        /* 🎨 COLORES PARA MODAL */
+        /*  COLORES PARA MODAL */
         .modal-rojo {
             border-left: 8px solid red;
         }
@@ -189,7 +189,7 @@ const pusher = new Pusher('918819e46056d1579079', {
 
 const channel = pusher.subscribe('botiquin');
 
-/* 🔵 AGREGAR EN TIEMPO REAL */
+/*  AGREGAR EN TIEMPO REAL */
 channel.bind('medicamento-agregado', function(data) {
 
     const tabla = document.querySelector("#tablaMedicamentos tbody");
@@ -227,7 +227,7 @@ channel.bind('medicamento-agregado', function(data) {
     tabla.appendChild(fila);
 });
 
-/* 🟢 ACTUALIZAR EN TIEMPO REAL */
+/*  ACTUALIZAR EN TIEMPO REAL */
 channel.bind('medicamento-actualizado', function(data) {
 
     const celda = document.getElementById("restante-" + data.id);
@@ -245,13 +245,13 @@ channel.bind('medicamento-actualizado', function(data) {
         fila.classList.add("stock-amarillo");
 });
 
-/* 🔴 ELIMINAR EN TIEMPO REAL */
+/*  ELIMINAR EN TIEMPO REAL */
 channel.bind('medicamento-eliminado', function(data) {
     const fila = document.getElementById("fila-" + data.id);
     if (fila) fila.remove();
 });
 
-/* ⚠ ALERTA DE STOCK BAJO */
+/*  ALERTA DE STOCK BAJO */
 channel.bind('alerta-stock-bajo', function(data) {
     const alertBox = document.createElement("div");
     alertBox.className = "alert alert-warning mt-3 alert-dismissible fade show";
@@ -262,7 +262,7 @@ channel.bind('alerta-stock-bajo', function(data) {
     document.getElementById("alertasTiempoReal").prepend(alertBox);
 });
 
-/* 🔔 EVENTO DE CONSUMO */
+/*  EVENTO DE CONSUMO */
 channel.bind('consumo', function(data) {
     const alertBox = document.createElement("div");
     alertBox.className = "alert alert-info mt-3 alert-dismissible fade show";
@@ -273,7 +273,7 @@ channel.bind('consumo', function(data) {
     document.getElementById("alertasTiempoReal").prepend(alertBox);
 });
 
-/* 🚫 NO ABRIR MODAL CUANDO SE HACE CLIC EN BOTONES DE ACCIONES */
+/*  NO ABRIR MODAL CUANDO SE HACE CLIC EN BOTONES DE ACCIONES */
 document.addEventListener("click", function(e) {
 
     // Clic en un botón dentro de acciones
@@ -285,7 +285,7 @@ document.addEventListener("click", function(e) {
 });
 
 
-/* 📌 CLIC EN FILA (ABRIR MODAL) */
+/*  CLIC EN FILA (ABRIR MODAL) */
 document.addEventListener("click", function(e) {
 
     // Evitar abrir modal si clic fue en acciones
