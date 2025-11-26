@@ -2,86 +2,334 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>💊 Botiquín Inteligente</title>
+    <title>Botiquín Inteligente</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://js.pusher.com/8.2/pusher.min.js"></script>
+
+    <style>
+        .acciones {
+            display: flex;
+            gap: 6px;
+        }
+
+        .acciones form {
+            margin: 0;
+        }
+
+        /* 🔴🟡 COLORES DE FILAS SEGÚN STOCK */
+        .stock-rojo {
+            background-color: rgba(255, 0, 0, 0.4) !important;
+        }
+
+        .stock-amarillo {
+            background-color: rgba(255, 255, 0, 0.4) !important;
+        }
+
+        tr.filaMedicamento {
+            transition: background-color .3s ease-in-out;
+            cursor: pointer;
+        }
+
+        /* 🎨 COLORES PARA MODAL */
+        .modal-rojo {
+            border-left: 8px solid red;
+        }
+
+        .modal-amarillo {
+            border-left: 8px solid yellow;
+        }
+    </style>
+
 </head>
+
 <body class="bg-dark text-light">
 <div class="container mt-5">
-    <h1 class="text-center mb-4">💊 Botiquín Inteligente</h1>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h3>Bienvenido, {{ usuario }}</h3>
-    <a href="/logout" class="btn btn-danger">Cerrar sesión</a>
-</div>
+    <h1 class="text-center mb-4">Botiquín Inteligente</h1>
 
-
-    <form action="/agregar" method="POST" class="mb-4">
-    <div class="row">
-        <div class="col-md-3">
-            <input type="text" name="nombre" placeholder="Nombre" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-            <input type="number" name="cantidad_total" placeholder="Cantidad total" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-            <input type="number" name="consumo_diario" placeholder="Consumo diario" class="form-control" required>
-        </div>
-        <div class="col-md-3">
-            <select name="tipo" class="form-select" required>
-                <option value="">Seleccionar tipo</option>
-                <option value="pastilla">Pastilla</option>
-                <option value="inyeccion">Inyección</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-success w-100">Agregar</button>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Bienvenido, {{ usuario }}</h3>
+        <a href="/reportes" class="btn btn-primary">Ver Reportes</a>
+        <a href="/logout" class="btn btn-danger">Cerrar sesión</a>
     </div>
-</form>
 
+    <!-- FORMULARIO AGREGAR -->
+    <form action="/agregar" method="POST" class="mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="cantidad_total" placeholder="Cantidad total" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="consumo_diario" placeholder="Consumo diario" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <select name="tipo" class="form-select" required>
+                    <option value="">Seleccionar tipo</option>
+                    <option value="pastilla">Pastilla</option>
+                    <option value="inyeccion">Inyección</option>
+                    <option value="jarabe">Jarabe</option>
+                    <option value="tableta">Tableta</option>
+                    <option value="capsula">Cápsula</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success w-100">Agregar</button>
+            </div>
+        </div>
+    </form>
 
+    <!-- ALERTAS DESDE BACKEND -->
     {% if alertas %}
-  <div class="container mt-3">
-    {% for alerta in alertas %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ alerta }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+        <div class="container mt-3">
+            {% for alerta in alertas %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ alerta }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-      {% for category, message in messages %}
-        <div class="alert alert-{{category}}">{{message}}</div>
-      {% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{category}}">{{ message }}</div>
+        {% endfor %}
     {% endwith %}
 
-     <table class="table table-dark table-striped">
+    <!-- FILTRO -->
+    <div class="mb-3">
+        <label class="form-label">Filtrar por tipo:</label>
+        <select id="filtroTipo" class="form-select w-25">
+            <option value="todos">Todos</option>
+            <option value="pastilla">Pastilla</option>
+            <option value="inyeccion">Inyección</option>
+            <option value="jarabe">Jarabe</option>
+            <option value="tableta">Tableta</option>
+            <option value="capsula">Cápsula</option>
+        </select>
+    </div>
+
+    <!-- CONTENEDOR ALERTAS PUSHER -->
+    <div id="alertasTiempoReal"></div>
+
+    <!-- TABLA -->
+    <table class="table table-dark table-striped" id="tablaMedicamentos">
         <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Total</th>
-                <th>Consumo diario</th>
-                <th>Restante</th>
-                <th>Acción</th>
-            </tr>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Total</th>
+            <th>Consumo diario</th>
+            <th>Restante</th>
+            <th>Acción</th>
+        </tr>
         </thead>
+
         <tbody>
         {% for m in medicamentos %}
-            <tr>
+            <tr class="filaMedicamento
+                {% if m.cantidad_restante <= 2 %}stock-rojo
+                {% elif m.cantidad_restante <= 5 %}stock-amarillo
+                {% endif %}"
+                data-nombre="{{ m.nombre }}"
+                data-tipo="{{ m.tipo }}"
+                data-restante="{{ m.cantidad_restante }}"
+                data-fecha_fin="{{ m.fecha_fin }}"
+                id="fila-{{ m.id }}"
+            >
                 <td>{{ m.nombre }}</td>
+                <td class="tipo">{{ m.tipo }}</td>
                 <td>{{ m.cantidad_total }}</td>
                 <td>{{ m.consumo_diario }}</td>
-                <td>{{ m.cantidad_restante }}</td>
+                <td id="restante-{{ m.id }}">{{ m.cantidad_restante }}</td>
                 <td>
-                    <form action="/consumir/{{ m.id }}" method="POST">
-                        <button class="btn btn-warning btn-sm">Consumir</button>
-                    </form>
+                    <div class="acciones">
+                        <form action="/consumir/{{ m.id }}" method="POST">
+                            <button class="btn btn-warning btn-sm">Consumir</button>
+                        </form>
+                        <form action="/eliminar/{{ m.id }}" method="POST" onsubmit="return confirm('¿Eliminar medicamento?');">
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="modalInfo" tabindex="-1">
+    <div class="modal-dialog bg-dark">
+        <div class="modal-content p-3">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title">Información del Medicamento</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body bg-dark">
+                <p><strong>Nombre:</strong> <span id="modalNombre"></span></p>
+                <p><strong>Tipo:</strong> <span id="modalTipo"></span></p>
+                <p><strong>Restante:</strong> <span id="modalRestante"></span></p>
+                <p><strong>Fecha aproximada de término:</strong> <span id="modalFechaFin"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ------------------- PUSHER ------------------- */
+const pusher = new Pusher('918819e46056d1579079', {
+    cluster: 'us2'
+});
+
+const channel = pusher.subscribe('botiquin');
+
+/* 🔵 AGREGAR EN TIEMPO REAL */
+channel.bind('medicamento-agregado', function(data) {
+
+    const tabla = document.querySelector("#tablaMedicamentos tbody");
+
+    const fila = document.createElement("tr");
+    fila.id = "fila-" + data.id;
+    fila.classList.add("filaMedicamento");
+
+    if (data.cantidad_restante <= 2) fila.classList.add("stock-rojo");
+    else if (data.cantidad_restante <= 5) fila.classList.add("stock-amarillo");
+
+    fila.dataset.nombre = data.nombre;
+    fila.dataset.tipo = data.tipo;
+    fila.dataset.restante = data.cantidad_restante;
+    fila.dataset.fecha_fin = data.fecha_fin;
+
+    fila.innerHTML = `
+        <td>${data.nombre}</td>
+        <td class="tipo">${data.tipo}</td>
+        <td>${data.cantidad_total}</td>
+        <td>${data.consumo_diario}</td>
+        <td id="restante-${data.id}">${data.cantidad_restante}</td>
+        <td>
+            <div class="acciones">
+                <form action="/consumir/${data.id}" method="POST">
+                    <button class="btn btn-warning btn-sm">Consumir</button>
+                </form>
+                <form action="/eliminar/${data.id}" method="POST" onsubmit="return confirm('¿Eliminar medicamento?');">
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </div>
+        </td>
+    `;
+
+    tabla.appendChild(fila);
+});
+
+/* 🟢 ACTUALIZAR EN TIEMPO REAL */
+channel.bind('medicamento-actualizado', function(data) {
+
+    const celda = document.getElementById("restante-" + data.id);
+    if (!celda) return;
+
+    celda.textContent = data.cantidad_restante;
+
+    const fila = celda.closest("tr");
+
+    fila.classList.remove("stock-rojo", "stock-amarillo");
+
+    if (data.cantidad_restante <= 2)
+        fila.classList.add("stock-rojo");
+    else if (data.cantidad_restante <= 5)
+        fila.classList.add("stock-amarillo");
+});
+
+/* 🔴 ELIMINAR EN TIEMPO REAL */
+channel.bind('medicamento-eliminado', function(data) {
+    const fila = document.getElementById("fila-" + data.id);
+    if (fila) fila.remove();
+});
+
+/* ⚠ ALERTA DE STOCK BAJO */
+channel.bind('alerta-stock-bajo', function(data) {
+    const alertBox = document.createElement("div");
+    alertBox.className = "alert alert-warning mt-3 alert-dismissible fade show";
+    alertBox.innerHTML = `
+        <strong>⚠ Alerta:</strong> ${data.mensaje}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.getElementById("alertasTiempoReal").prepend(alertBox);
+});
+
+/* 🔔 EVENTO DE CONSUMO */
+channel.bind('consumo', function(data) {
+    const alertBox = document.createElement("div");
+    alertBox.className = "alert alert-info mt-3 alert-dismissible fade show";
+    alertBox.innerHTML = `
+        ${data.mensaje}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.getElementById("alertasTiempoReal").prepend(alertBox);
+});
+
+/* 🚫 NO ABRIR MODAL CUANDO SE HACE CLIC EN BOTONES DE ACCIONES */
+document.addEventListener("click", function(e) {
+
+    // Clic en un botón dentro de acciones
+    if (e.target.closest(".acciones button")) return;
+
+    // Clic dentro del form de acciones
+    if (e.target.closest(".acciones form")) return;
+
+});
+
+
+/* 📌 CLIC EN FILA (ABRIR MODAL) */
+document.addEventListener("click", function(e) {
+
+    // Evitar abrir modal si clic fue en acciones
+    if (e.target.closest(".acciones")) return;
+
+    const fila = e.target.closest(".filaMedicamento");
+    if (!fila) return;
+
+    const nombre = fila.dataset.nombre;
+    const tipo = fila.dataset.tipo;
+    const restante = parseInt(fila.dataset.restante);
+    let fechaFin = fila.dataset.fecha_fin;
+
+    if (!fechaFin || fechaFin === "None") fechaFin = "No disponible";
+
+    document.getElementById("modalNombre").textContent = nombre;
+    document.getElementById("modalTipo").textContent = tipo;
+    document.getElementById("modalRestante").textContent = restante;
+    document.getElementById("modalFechaFin").textContent = fechaFin;
+
+    const modalContent = document.querySelector("#modalInfo .modal-content");
+    modalContent.classList.remove("modal-rojo", "modal-amarillo");
+
+    if (restante <= 2) modalContent.classList.add("modal-rojo");
+    else if (restante <= 5) modalContent.classList.add("modal-amarillo");
+
+    const modal = new bootstrap.Modal(document.getElementById("modalInfo"));
+    modal.show();
+});
+
+
+/* FILTRO DE TIPOS */
+document.getElementById("filtroTipo").addEventListener("change", function() {
+    const filtro = this.value.toLowerCase();
+    const filas = document.querySelectorAll("#tablaMedicamentos tbody tr");
+
+    filas.forEach(fila => {
+        const tipo = fila.querySelector(".tipo").textContent.toLowerCase();
+
+        fila.style.display = (filtro === "todos" || tipo === filtro) ? "" : "none";
+    });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

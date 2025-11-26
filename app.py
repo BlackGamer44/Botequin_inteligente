@@ -6,8 +6,9 @@ from models import db, Medicamento, Usuario
 from factory import MedicamentoFactory
 from events import EventManager
 from botiquin_facade import BotiquinFacade
-from decorators import AlertaDecorator, RegistroDecorator
-
+from decorators import AlertaDecorator, RegistroDecorator, ProyeccionDecorator
+from reportes_cqrs import MedicamentoQueryService, MedicamentoCommandService
+import pusher
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -19,18 +20,16 @@ migrate = Migrate(app, db_instance.db)
 
 event_manager = EventManager()
 botequin = BotiquinFacade()
+queries = MedicamentoQueryService()
+commands = MedicamentoCommandService()
 
-# Lista para almacenar alertas
-alertas = []
-
-# Evento de alerta
-def alerta_stock_bajo(medicamento):
-    if medicamento.cantidad_restante <= 2:
-        alertas.append(f"⚠️ Stock bajo: {medicamento.nombre} tiene solo {medicamento.cantidad_restante} unidades")
-
-event_manager.subscribe("medicamento_agregado", alerta_stock_bajo)
-event_manager.subscribe("medicamento_actualizado", alerta_stock_bajo)
-
+pusher_client = pusher.Pusher(
+    app_id='2077108',
+    key='918819e46056d1579079',
+    secret='49cada5ca34511e202ff',
+    cluster='us2',
+    ssl=True
+)
 
 # --- Rutas de autenticación ---
 @app.route("/registro", methods=["GET", "POST"])
@@ -48,12 +47,16 @@ def registro():
 
         db.session.add(nuevo_usuario)
         db.session.commit()
-        event_manager.sesion("usuario_creado", {"usuario": nombre})
+        event_manager.emit("usuario_creado", {"usuario": nombre})
         flash("Usuario registrado correctamente. Inicia sesión.", "success")
         return redirect(url_for("login"))
 
     return render_template("register.html")
 
+def obtener_usuario_actual():
+    if "usuario" not in session:
+        return None
+    return Usuario.query.filter_by(nombre=session["usuario"]).first()
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -100,13 +103,36 @@ def login_requerido(func):
 @login_requerido
 def index():
     usuario_actual = Usuario.query.filter_by(nombre=session["usuario"]).first()
-    medicamentos = Medicamento.query.filter_by(usuario_id=usuario_actual.id).all()
 
-    # Filtrar alertas solo de este usuario
-    # obtener una copia de las alertas antes de limpiarlas
-    alertas_usuario = list(alertas)
-    alertas.clear()
-    return render_template("index.html", medicamentos=medicamentos, usuario=session["usuario"], alertas=alertas_usuario)
+    medicamentos_query = Medicamento.query.filter_by(usuario_id=usuario_actual.id).all()
+
+    alertas_usuario = [
+        alerta for alerta in botequin.alertas
+        if any(med.nombre in alerta for med in medicamentos_query)
+    ]
+
+    medicamentos = []
+    for m in medicamentos_query:
+        dec = ProyeccionDecorator(m)
+        medicamentos.append({
+            "id": m.id,
+            "nombre": m.nombre,
+            "tipo": m.tipo,
+            "cantidad_total": m.cantidad_total,
+            "consumo_diario": m.consumo_diario,
+            "cantidad_restante": m.cantidad_restante,
+            "fecha_fin": dec.calcular_fecha_fin()
+        })
+
+    return render_template(
+        "index.html",
+        medicamentos=medicamentos,
+        usuario=session["usuario"],
+        alertas=alertas_usuario
+    )
+
+
+
 
 @app.route("/agregar", methods=["POST"])
 @login_requerido
@@ -122,6 +148,13 @@ def agregar():
     return redirect(url_for("index"))
 
 
+@app.route("/reportes")
+@login_requerido
+def reportes():
+    usuario = Usuario.query.filter_by(nombre=session["usuario"]).first()
+    datos = queries.obtener_proyecciones_usuario(usuario.id)
+    return render_template("reportes.html", datos=datos)
+
 
 @app.route("/consumir/<int:id>", methods=["POST"])
 @login_requerido
@@ -135,6 +168,19 @@ def consumir(id):
 
         event_manager.emit("medicamento_consumido", {"nombre": medicamento.nombre, "restante": medicamento.cantidad_restante})
         flash(f"Se registró el consumo de {medicamento.nombre}.", "info")
+
+    return redirect(url_for("index"))
+
+@app.route("/eliminar/<int:medicamento_id>", methods=["POST"])
+@login_requerido
+def eliminar_medicamento(medicamento_id):
+    usuario = obtener_usuario_actual()
+    exito = botequin.eliminar_medicamento(medicamento_id, usuario)
+
+    if exito:
+        flash("Medicamento eliminado correctamente", "success")
+    else:
+        flash("No se pudo eliminar el medicamento", "danger")
 
     return redirect(url_for("index"))
 

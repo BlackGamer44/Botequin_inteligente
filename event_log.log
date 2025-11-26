@@ -58,3 +58,135 @@
 [2025-11-13 19:43:47.930793] USUARIO: briseno | EVENTO: medicamento_agregado | DATA: <Medicamento parazetamol (pastilla)>
 [2025-11-13 19:45:55.835106] USUARIO: briseno | EVENTO: medicamento_consumido | DATA: {'nombre': 'parazetamol', 'restante': 9}
 [2025-11-13 19:48:28.048078] USUARIO: briseno | EVENTO: cierre_sesion | DATA: {'usuario': 'briseno'}
+[2025-11-19 11:57:27.948117] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-19 17:34:34.528683] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-19 17:39:16.269814] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'parazetamol', 'restante': 90}
+[2025-11-19 17:39:45.459206] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento test (pastilla)>
+[2025-11-19 18:22:28.423880] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-19 18:52:51.005636] USUARIO: angel | EVENTO: cierre_sesion | DATA: {'usuario': 'angel'}
+[2025-11-19 18:53:07.114754] USUARIO: javier | EVENTO: inicio_sesion | DATA: {'usuario': 'javier'}
+[2025-11-19 18:56:21.935186] USUARIO: javier | EVENTO: cierre_sesion | DATA: {'usuario': 'javier'}
+[2025-11-19 18:56:27.881556] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-19 19:13:28.599435] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 9}
+[2025-11-25 10:14:51.782923] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 10:15:04.980112] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 8}
+[2025-11-25 10:15:24.985321] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 7}
+[2025-11-25 10:15:40.342083] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 6}
+[2025-11-25 10:15:48.484348] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 5}
+[2025-11-25 10:15:55.561340] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 4}
+[2025-11-25 10:16:03.119079] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 3}
+[2025-11-25 10:16:11.212276] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 2}
+[2025-11-25 10:16:21.592227] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 1}
+[2025-11-25 10:19:04.448718] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento angel (inyeccion)>
+[2025-11-25 11:06:01.094166] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento test ()>
+[2025-11-25 11:24:49.212499] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'angel', 'restante': 8}
+[2025-11-25 11:24:55.765430] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'angel', 'restante': 6}
+[2025-11-25 11:25:03.053702] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'angel', 'restante': 4}
+[2025-11-25 11:25:10.988841] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 0}
+[2025-11-25 11:34:12.327301] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'angel', 'restante': 2}
+[2025-11-25 12:01:45.907660] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 12:01:56.654372] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'angel', 'restante': 0}
+[2025-11-25 12:02:23.672045] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento angel (inyeccion)>
+[2025-11-25 12:02:43.875965] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'test', 'restante': 0}
+[2025-11-25 12:02:58.796889] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento test (pastilla)>
+[2025-11-25 12:03:11.611778] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento angel (pastilla)>
+[2025-11-25 12:03:42.917961] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento a1 (pastilla)>
+[2025-11-25 12:03:52.410401] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 8}
+[2025-11-25 12:04:04.330683] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 6}
+[2025-11-25 12:04:14.770864] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 4}
+[2025-11-25 12:04:25.109605] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 2}
+[2025-11-25 12:15:29.266496] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 12:15:39.508279] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 0}
+[2025-11-25 12:15:49.792481] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'parazetamol', 'restante': 88}
+[2025-11-25 12:16:12.420330] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento a2 (inyeccion)>
+[2025-11-25 12:17:04.702772] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento a1 (pastilla)>
+[2025-11-25 12:17:40.146779] USUARIO: angel | EVENTO: cierre_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 12:17:59.942909] USUARIO: javier | EVENTO: inicio_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 12:40:46.843928] USUARIO: javier | EVENTO: medicamento_agregado | DATA: <Medicamento s1 (jarabe)>
+[2025-11-25 12:41:10.733971] USUARIO: javier | EVENTO: medicamento_agregado | DATA: <Medicamento s2 (tableta)>
+[2025-11-25 12:42:35.823829] USUARIO: javier | EVENTO: medicamento_agregado | DATA: <Medicamento mio1 (capsula)>
+[2025-11-25 14:53:17.089131] USUARIO: javier | EVENTO: cierre_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 14:53:24.112318] USUARIO: javier | EVENTO: inicio_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 14:53:44.314585] USUARIO: javier | EVENTO: cierre_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 14:53:51.397019] USUARIO: nene | EVENTO: inicio_sesion | DATA: {'usuario': 'nene'}
+[2025-11-25 14:54:16.575120] USUARIO: nene | EVENTO: cierre_sesion | DATA: {'usuario': 'nene'}
+[2025-11-25 17:39:14.679361] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 17:41:32.669134] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 17:41:43.849346] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 0}
+[2025-11-25 17:43:10.001107] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva z ()>
+[2025-11-25 17:43:23.401060] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a2', 'restante': 8}
+[2025-11-25 17:43:31.878732] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a2', 'restante': 6}
+[2025-11-25 17:43:39.147535] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a2', 'restante': 4}
+[2025-11-25 17:43:52.806649] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a2', 'restante': 2}
+[2025-11-25 17:46:30.298514] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a2', 'restante': 0}
+[2025-11-25 17:46:55.245649] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento a2 (inyeccion)>
+[2025-11-25 17:47:16.062966] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 1 (inyeccion)>
+[2025-11-25 17:54:03.550016] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento parazetamol (pastilla)>
+[2025-11-25 17:54:13.154473] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento ampicilina (inyeccion)>
+[2025-11-25 17:54:34.302867] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 4 (pastilla)>
+[2025-11-25 17:54:56.149504] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento prueva1 (capsula)>
+[2025-11-25 17:55:08.431964] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva1', 'restante': 8}
+[2025-11-25 17:55:31.553650] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva1', 'restante': 6}
+[2025-11-25 17:56:04.475430] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva1', 'restante': 4}
+[2025-11-25 17:56:15.133455] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva1', 'restante': 2}
+[2025-11-25 17:56:24.684655] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva1', 'restante': 0}
+[2025-11-25 17:56:36.998287] USUARIO: angel | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva1 (capsula)>
+[2025-11-25 23:32:18.976479] USUARIO: javier | EVENTO: inicio_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 23:32:32.753599] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 8}
+[2025-11-25 23:32:37.647953] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 7}
+[2025-11-25 23:32:43.799888] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 6}
+[2025-11-25 23:32:50.120834] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 5}
+[2025-11-25 23:32:56.879907] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 4}
+[2025-11-25 23:33:03.447677] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 3}
+[2025-11-25 23:33:08.559514] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 2}
+[2025-11-25 23:34:16.488469] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 1}
+[2025-11-25 23:40:47.989392] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 0}
+[2025-11-25 23:46:20.477517] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 9}
+[2025-11-25 23:46:27.930479] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 1', 'restante': 8}
+[2025-11-25 23:46:37.710043] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 's1', 'restante': 8}
+[2025-11-25 23:46:45.254054] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 's1', 'restante': 6}
+[2025-11-25 23:46:52.834035] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 's1', 'restante': 4}
+[2025-11-25 23:47:00.028565] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 's1', 'restante': 2}
+[2025-11-25 23:47:57.938915] USUARIO: javier | EVENTO: medicamento_agregado | DATA: <Medicamento a3 (tableta)>
+[2025-11-25 23:48:11.865121] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a3', 'restante': 8}
+[2025-11-25 23:48:17.772790] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a3', 'restante': 6}
+[2025-11-25 23:48:25.649043] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a3', 'restante': 4}
+[2025-11-25 23:48:31.552502] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a3', 'restante': 2}
+[2025-11-25 23:50:20.431103] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a3', 'restante': 0}
+[2025-11-25 23:53:58.733469] USUARIO: javier | EVENTO: cierre_sesion | DATA: {'usuario': 'javier'}
+[2025-11-25 23:54:09.871697] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-25 23:54:43.163762] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento a1 (jarabe)>
+[2025-11-25 23:54:51.639799] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 8}
+[2025-11-25 23:54:59.212342] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 6}
+[2025-11-25 23:55:05.781653] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 4}
+[2025-11-25 23:55:13.287251] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 2}
+[2025-11-26 07:26:55.095974] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 07:27:30.938705] USUARIO: angel | EVENTO: medicamento_agregado | DATA: <Medicamento prueva 2 (tableta)>
+[2025-11-26 07:30:30.273129] USUARIO: angel | EVENTO: cierre_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 07:30:38.441285] USUARIO: javier | EVENTO: inicio_sesion | DATA: {'usuario': 'javier'}
+[2025-11-26 07:36:59.762489] USUARIO: javier | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 1 ()>
+[2025-11-26 07:37:15.475205] USUARIO: javier | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 1 ()>
+[2025-11-26 07:37:29.425613] USUARIO: javier | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 1 ()>
+[2025-11-26 07:37:42.531020] USUARIO: javier | EVENTO: medicamento_eliminado | DATA: <Medicamento prueva 1 ()>
+[2025-11-26 07:37:57.246422] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 's1', 'restante': 0}
+[2025-11-26 07:59:10.407336] USUARIO: javier | EVENTO: medicamento_agregado | DATA: <Medicamento q1 (jarabe)>
+[2025-11-26 07:59:28.987507] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'q1', 'restante': 8}
+[2025-11-26 07:59:36.205296] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'q1', 'restante': 6}
+[2025-11-26 07:59:47.397451] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'q1', 'restante': 4}
+[2025-11-26 08:00:41.981076] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 9}
+[2025-11-26 08:01:00.563144] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 8}
+[2025-11-26 08:04:35.876640] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 7}
+[2025-11-26 08:04:47.166685] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 6}
+[2025-11-26 08:04:55.537732] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 5}
+[2025-11-26 08:05:23.180325] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 4}
+[2025-11-26 08:07:55.412795] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'q1', 'restante': 2}
+[2025-11-26 08:08:08.585888] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'q1', 'restante': 0}
+[2025-11-26 08:08:44.536960] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 3}
+[2025-11-26 08:19:49.563741] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'a1', 'restante': 2}
+[2025-11-26 08:22:30.651991] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 08:24:15.655268] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 08:43:57.375998] USUARIO: javier | EVENTO: medicamento_consumido | DATA: {'nombre': 'mio1', 'restante': 8}
+[2025-11-26 08:58:36.227854] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'keterolako', 'restante': 34}
+[2025-11-26 08:59:11.050851] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 2', 'restante': 8}
+[2025-11-26 08:59:18.424466] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 2', 'restante': 6}
+[2025-11-26 08:59:29.482141] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'prueva 2', 'restante': 4}
