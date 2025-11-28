@@ -194,3 +194,7 @@
 [2025-11-26 11:22:45.113497] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'keterolako', 'restante': 33}
 [2025-11-26 11:22:55.690630] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'keterolako', 'restante': 32}
 [2025-11-26 11:43:57.780406] USUARIO: angel | EVENTO: cierre_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 12:48:50.948174] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 17:26:19.041354] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 19:55:07.419939] USUARIO: angel | EVENTO: inicio_sesion | DATA: {'usuario': 'angel'}
+[2025-11-26 19:55:26.842927] USUARIO: angel | EVENTO: medicamento_consumido | DATA: {'nombre': 'keterolako', 'restante': 31}
